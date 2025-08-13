@@ -9,8 +9,10 @@ import {
 } from "./definitions";
 import { formatCurrency } from "./utils";
 
+// SQL 사용 선언
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
+// 수익 데이터 불러오기
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
@@ -30,6 +32,7 @@ export async function fetchRevenue() {
   }
 }
 
+// 최근 송장 5개 불러오기
 export async function fetchLatestInvoices() {
   try {
     const data = await sql<LatestInvoiceRaw[]>`
@@ -50,6 +53,7 @@ export async function fetchLatestInvoices() {
   }
 }
 
+// 카드 데이터 불러오기
 export async function fetchCardData() {
   try {
     // You can probably combine these into a single SQL query
@@ -167,6 +171,7 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
+// 구매자 불러오기
 export async function fetchCustomers() {
   try {
     const customers = await sql<CustomerField[]>`
